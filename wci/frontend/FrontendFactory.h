@@ -20,7 +20,7 @@ class FrontendFactory
 public:
     /**
      * Create a parser.
-     * @param language the name of the source language (e.g., "Pascal").
+     * @param language the name of the source language (e.g., "Cpp").
      * @param type the type of parser (e.g., "top-down").
      * @param source the source object.
      * @return the parser.

@@ -1,11 +1,11 @@
-wci/frontend/FrontendFactory.o: ../wci/frontend/FrontendFactory.cpp \
-  ../wci/frontend/FrontendFactory.h ../wci/frontend/Parser.h \
-  ../wci/frontend/Scanner.h ../wci/frontend/Source.h \
-  ../wci/frontend/../message/MessageHandler.h \
-  ../wci/frontend/../message/MessageListener.h \
-  ../wci/frontend/../message/Message.h \
-  ../wci/frontend/../message/MessageProducer.h ../wci/frontend/Token.h \
-  ../wci/frontend/../Object.h \
+wci/frontend/Cpp/CppScanner.o: ../wci/frontend/Cpp/CppScanner.cpp \
+  ../wci/frontend/Cpp/CppScanner.h ../wci/frontend/Cpp/../Scanner.h \
+  ../wci/frontend/Cpp/../Source.h \
+  ../wci/frontend/Cpp/../../message/MessageHandler.h \
+  ../wci/frontend/Cpp/../../message/MessageListener.h \
+  ../wci/frontend/Cpp/../../message/Message.h \
+  ../wci/frontend/Cpp/../../message/MessageProducer.h \
+  ../wci/frontend/Cpp/../Token.h ../wci/frontend/Cpp/../../Object.h \
   /Users/janettebormann/eclipse-workspace/boost_1_68_0/boost/any.hpp \
   /Users/janettebormann/eclipse-workspace/boost_1_68_0/boost/config.hpp \
   /Users/janettebormann/eclipse-workspace/boost_1_68_0/boost/config/user.hpp \
@@ -343,31 +343,30 @@ wci/frontend/FrontendFactory.o: ../wci/frontend/FrontendFactory.cpp \
   /Users/janettebormann/eclipse-workspace/boost_1_68_0/boost/algorithm/string/formatter.hpp \
   /Users/janettebormann/eclipse-workspace/boost_1_68_0/boost/algorithm/string/detail/formatter.hpp \
   /Users/janettebormann/eclipse-workspace/boost_1_68_0/boost/algorithm/string/detail/util.hpp \
-  ../wci/frontend/../intermediate/SymTab.h \
-  ../wci/frontend/../intermediate/ICode.h \
-  ../wci/frontend/Cpp/CppParserTD.h \
-  ../wci/frontend/Cpp/CppErrorHandler.h ../wci/frontend/Cpp/CppError.h \
-  ../wci/frontend/Cpp/CppScanner.h
+  ../wci/frontend/Cpp/CppToken.h ../wci/frontend/Cpp/CppError.h \
+  ../wci/frontend/Cpp/tokens/CppWordToken.h \
+  ../wci/frontend/Cpp/tokens/CppNumberToken.h \
+  ../wci/frontend/Cpp/tokens/CppStringToken.h \
+  ../wci/frontend/Cpp/tokens/CppSpecialSymbolToken.h \
+  ../wci/frontend/Cpp/tokens/CppErrorToken.h
 
-../wci/frontend/FrontendFactory.h:
+../wci/frontend/Cpp/CppScanner.h:
 
-../wci/frontend/Parser.h:
+../wci/frontend/Cpp/../Scanner.h:
 
-../wci/frontend/Scanner.h:
+../wci/frontend/Cpp/../Source.h:
 
-../wci/frontend/Source.h:
+../wci/frontend/Cpp/../../message/MessageHandler.h:
 
-../wci/frontend/../message/MessageHandler.h:
+../wci/frontend/Cpp/../../message/MessageListener.h:
 
-../wci/frontend/../message/MessageListener.h:
+../wci/frontend/Cpp/../../message/Message.h:
 
-../wci/frontend/../message/Message.h:
+../wci/frontend/Cpp/../../message/MessageProducer.h:
 
-../wci/frontend/../message/MessageProducer.h:
+../wci/frontend/Cpp/../Token.h:
 
-../wci/frontend/Token.h:
-
-../wci/frontend/../Object.h:
+../wci/frontend/Cpp/../../Object.h:
 
 /Users/janettebormann/eclipse-workspace/boost_1_68_0/boost/any.hpp:
 
@@ -1043,14 +1042,16 @@ wci/frontend/FrontendFactory.o: ../wci/frontend/FrontendFactory.cpp \
 
 /Users/janettebormann/eclipse-workspace/boost_1_68_0/boost/algorithm/string/detail/util.hpp:
 
-../wci/frontend/../intermediate/SymTab.h:
-
-../wci/frontend/../intermediate/ICode.h:
-
-../wci/frontend/Cpp/CppParserTD.h:
-
-../wci/frontend/Cpp/CppErrorHandler.h:
+../wci/frontend/Cpp/CppToken.h:
 
 ../wci/frontend/Cpp/CppError.h:
 
-../wci/frontend/Cpp/CppScanner.h:
+../wci/frontend/Cpp/tokens/CppWordToken.h:
+
+../wci/frontend/Cpp/tokens/CppNumberToken.h:
+
+../wci/frontend/Cpp/tokens/CppStringToken.h:
+
+../wci/frontend/Cpp/tokens/CppSpecialSymbolToken.h:
+
+../wci/frontend/Cpp/tokens/CppErrorToken.h:

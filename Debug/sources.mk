@@ -28,8 +28,8 @@ wci \
 wci/backend \
 wci/backend/compiler \
 wci/backend/interpreter \
-wci/frontend/Cplusplus \
-wci/frontend/Cplusplus/tokens \
+wci/frontend/Cpp \
+wci/frontend/Cpp/tokens \
 wci/frontend \
 wci/frontend/pascal \
 wci/frontend/pascal/tokens \

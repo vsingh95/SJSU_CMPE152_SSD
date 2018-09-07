@@ -11,8 +11,8 @@ RM := rm -rf
 -include wci/message/subdir.mk
 -include wci/frontend/pascal/tokens/subdir.mk
 -include wci/frontend/pascal/subdir.mk
--include wci/frontend/Cplusplus/tokens/subdir.mk
--include wci/frontend/Cplusplus/subdir.mk
+-include wci/frontend/Cpp/tokens/subdir.mk
+-include wci/frontend/Cpp/subdir.mk
 -include wci/frontend/subdir.mk
 -include wci/backend/interpreter/subdir.mk
 -include wci/backend/compiler/subdir.mk
