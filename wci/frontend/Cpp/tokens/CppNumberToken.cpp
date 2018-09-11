@@ -40,12 +40,12 @@ void CppNumberToken::extract() throw (string)
     char current_ch;              // current character
 
     // Assume INTEGER token type for now.
-    type = (TokenType) PT_INTEGER;
+    type = (TokenType) CT_INTEGER;
 
     // Extract the digits of the whole part of the number.
     whole_digits = unsigned_integer_digits();
 
-    if (type == (TokenType) PT_ERROR) return;
+    if (type == (TokenType) CT_ERROR) return;
 
     // Is there a . ?
     // It could be a decimal point or the start of a .. token.
@@ -59,13 +59,13 @@ void CppNumberToken::extract() throw (string)
         else
         {
             // Decimal point, so token type is REAL.
-            type = (TokenType) PT_REAL;
+            type = (TokenType) CT_REAL;
             text += current_ch;
             current_ch = next_char();  // consume decimal point
 
             // Collect the digits of the fraction part of the number.
             fraction_digits = unsigned_integer_digits();
-            if (type == (TokenType) PT_ERROR)
+            if (type == (TokenType) CT_ERROR)
             {
                 return;
             }
@@ -78,7 +78,7 @@ void CppNumberToken::extract() throw (string)
     if (!saw_dot_dot && ((current_ch == 'E') || (current_ch == 'e')))
     {
         // Exponent, so token type is REAL.
-        type = (TokenType) PT_REAL;
+        type = (TokenType) CT_REAL;
         text += current_ch;
         current_ch = next_char();  // consume 'E' or 'e'
 
@@ -95,25 +95,25 @@ void CppNumberToken::extract() throw (string)
     }
 
     // Compute the value of an integer number token.
-    if (type == (TokenType) PT_INTEGER)
+    if (type == (TokenType) CT_INTEGER)
     {
         int integer_value = compute_integer_value(whole_digits);
 
-        if (type != (TokenType) PT_ERROR)
+        if (type != (TokenType) CT_ERROR)
         {
             value = integer_value;
         }
     }
 
     // Compute the value of a real number token.
-    else if (type == (TokenType) PT_REAL)
+    else if (type == (TokenType) CT_REAL)
     {
         float float_value = compute_float_value(whole_digits,
                                                 fraction_digits,
                                                 exponent_digits,
                                                 exponent_sign);
 
-        if (type != (TokenType) PT_ERROR)
+        if (type != (TokenType) CT_ERROR)
         {
             value = float_value;
         }
@@ -133,7 +133,7 @@ string CppNumberToken::unsigned_integer_digits() throw (string)
     // Must have at least one digit.
     if (!isdigit(current_ch))
     {
-        type = (TokenType) PT_ERROR;
+        type = (TokenType) CT_ERROR;
         value = (int) INVALID_NUMBER;
         return "";
     }
@@ -179,7 +179,7 @@ int CppNumberToken::compute_integer_value(string digits)
 
     // Overflow:  Set the integer out of range error.
     else {
-        type = (TokenType) PT_ERROR;
+        type = (TokenType) CT_ERROR;
         value = (int) RANGE_INTEGER;
         return 0;
     }
@@ -217,7 +217,7 @@ float CppNumberToken::compute_float_value(string whole_digits,
     int whole_length = whole_digits.length();
     if (abs(exponent_value + whole_length) > MAX_EXPONENT)
     {
-        type = (TokenType) PT_ERROR;
+        type = (TokenType) CT_ERROR;
         value = (int) RANGE_REAL;
         return 0.0f;
     }

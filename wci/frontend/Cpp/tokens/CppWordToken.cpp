@@ -52,7 +52,7 @@ void CppWordToken::extract() throw (string)
     else
     {
         // Identifier.
-        type = (TokenType) PT_IDENTIFIER;
+        type = (TokenType) CT_IDENTIFIER;
     }
 }
 

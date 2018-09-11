@@ -27,11 +27,21 @@ void CppToken::initialize()
 
     vector<string> rw_strings =
     {
-        "AND", "ARRAY", "BEGIN", "CASE", "CONST", "DIV", "DO", "DOWNTO",
-        "ELSE", "END", "FILE", "FOR", "FUNCTION", "GOTO", "IF", "IN",
-        "LABEL", "MOD", "NIL", "NOT", "OF", "OR", "PACKED", "PROCEDURE",
-        "PROGRAM", "RECORD", "REPEAT", "SET", "THEN", "TO", "TYPE",
-        "UNTIL", "VAR", "WHILE", "WITH"
+        // "AND", "ARRAY", "BEGIN", "CASE", "CONST", "DIV", "DO", "DOWNTO",
+        // "ELSE", "END", "FILE", "FOR", "FUNCTION", "GOTO", "IF", "IN",
+        // "LABEL", "MOD", "NIL", "NOT", "OF", "OR", "PACKED", "PROCEDURE",
+        // "PROGRAM", "RECORD", "REPEAT", "SET", "THEN", "TO", "TYPE",
+        // "UNTIL", "VAR", "WHILE", "WITH"
+        
+        "AUTO", "DOUBLE", "INT", "STRUCT", 
+        "BREAK", "ELSE", "LONG", "SWITCH", 
+        "CASE", "ENUM", "NAMESPACE", "TEMPLATE",
+        "CHAR", "EXTERN", "OPERATOR", "THIS",
+        "CLASS", "FLOAT", "PROTECTED", "THROW", 
+        "CONST", "FOR", "PUBLIC", "UNION",
+        "CONTINUE", "GOTO", "RETURN", "VOID", 
+        "DO", "IF", "STATIC", "WHILE"
+
     };
 
     vector<CppTokenType> rw_keys =

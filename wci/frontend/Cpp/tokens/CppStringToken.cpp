@@ -59,12 +59,12 @@ void CppStringToken::extract() throw (string)
     {
         next_char();  // consume final quote
         text += '\'';
-        type = (TokenType) PT_STRING;
+        type = (TokenType) CT_STRING;
         value = value_str;
     }
     else
     {
-        type = (TokenType) PT_ERROR;
+        type = (TokenType) CT_ERROR;
         value = (int) UNEXPECTED_EOF;
     }
 }

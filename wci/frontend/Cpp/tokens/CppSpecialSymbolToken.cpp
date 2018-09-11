@@ -104,7 +104,7 @@ void CppSpecialSymbolToken::extract() throw (string)
         default:
         {
             next_char();  // consume bad character
-            type = (TokenType) (PT_ERROR);
+            type = (TokenType) (CT_ERROR);
             value = (int) INVALID_CHARACTER;
             good_symbol = false;
         }

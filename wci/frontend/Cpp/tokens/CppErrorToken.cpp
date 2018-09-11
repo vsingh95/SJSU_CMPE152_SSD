@@ -20,7 +20,7 @@ CppErrorToken::CppErrorToken(Source *source, CppErrorCode error_code,
     throw (string)
     : CppToken(source)
 {
-    type = (TokenType) PT_ERROR;
+    type = (TokenType) CT_ERROR;
     text = token_text;
     value = (int) error_code;
 }
