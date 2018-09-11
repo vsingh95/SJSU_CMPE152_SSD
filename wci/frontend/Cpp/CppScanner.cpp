@@ -15,6 +15,7 @@
 #include "tokens/CppNumberToken.h"
 #include "tokens/CppStringToken.h"
 #include "tokens/CppSpecialSymbolToken.h"
+//#include "tokens/CppCharacterToken.h"
 #include "tokens/CppErrorToken.h"
 
 namespace wci { namespace frontend { namespace Cpp {
@@ -43,7 +44,7 @@ Token *CppScanner::extract_token() throw (string)
     {
         token = nullptr;
     }
-    else if (isalpha(current_ch))
+    else if (isalpha(current_ch) || current_ch == '_')
     {
         token = new CppWordToken(source);
     }
@@ -51,7 +52,7 @@ Token *CppScanner::extract_token() throw (string)
     {
         token = new CppNumberToken(source);
     }
-    else if (current_ch == '\'')
+    else if (current_ch == '\"')
     {
         token = new CppStringToken(source);
     }
@@ -72,25 +73,60 @@ Token *CppScanner::extract_token() throw (string)
 void CppScanner::skip_white_space() throw (string)
 {
     char current_ch = current_char();
+    bool block_comment_finish = false; 
 
-    while (isspace(current_ch) || (current_ch == '{')) {
+    while (isspace(current_ch) || (current_ch == '/')) {
 
         // Start of a comment?
-        if (current_ch == '{')
+        if (current_ch == '/')
         {
-            do
-            {
-                current_ch = next_char();  // consume comment characters
-            } while ((current_ch != '}') &&
-                     (current_ch != Source::END_OF_FILE));
+            char peek_ch = peek_char();
 
-            // Found closing '}'?
-            if (current_ch == '}')
+            //One line comment 
+            if(peek_ch == '/')
             {
-                current_ch = next_char();  // consume the '}'
+                do
+                {
+                    current_ch = next_char();  // consume comment characters
+                } while ((current_ch != Source::END_OF_LINE));
+            }
+            //Block Comment 
+            else if(peek_ch == '*')
+            {
+                current_ch = next_char(); 
+                current_ch = next_char(); 
+
+                do
+                {
+                    if(block_comment_finish)
+                    {
+                        if(current_ch == '/')
+                        {
+                            current_ch = next_char();
+                            break;  
+                        }
+                        else if(current_ch != '*')
+                        {
+                            block_comment_finish = false; 
+                        }
+
+                        current_ch = next_char();
+                    }
+                    //Block comment potentially ending
+                    if(current_ch == '*' && !block_comment_finish)
+                    {
+                        block_comment_finish = true; 
+                    }
+
+                    current_ch = next_char(); //consume comment chars
+                } while (current_ch != Source::END_OF_FILE);
+            }
+            else
+            {
+                //Not comment, single '/'
+                break; 
             }
         }
-
         // Not a comment.
         else current_ch = next_char();  // consume whitespace character
     }

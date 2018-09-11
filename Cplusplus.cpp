@@ -26,6 +26,7 @@
 using namespace std;
 using namespace wci::frontend;
 using namespace wci::frontend::Cpp;
+using namespace wci::frontend::pascal;
 using namespace wci::intermediate;
 using namespace wci::backend;
 using namespace wci::message;
@@ -44,7 +45,6 @@ int main(int argc, char *args[])
     try
     {
         // Operation.
-    	printf("Started/n");
         string operation = args[1];
         if ((operation != "compile") && (operation != "execute"))
         {
@@ -58,7 +58,6 @@ int main(int argc, char *args[])
         {
             flags += string(args[i]).substr(1);
         }
-        printf("Started 2/n");
         // Source path.
         if (i < argc) {
             string path = args[i];
@@ -203,7 +202,8 @@ void Cplusplus::message_received(Message& message)
 
             if (   (token_type == "INTEGER")
                 || (token_type == "REAL")
-                || (token_type == "STRING"))
+                || (token_type == "STRING")
+                || (token_type == "CHARACTER"))
             {
                 if (token_type == "STRING")
                 {
