@@ -27,7 +27,7 @@ void CppStringToken::extract() throw (string)
     string value_str = "";
 
     char current_ch = next_char();  // consume initial quote
-    text += "'";
+    text += "\"";
 
     // Get string characters.
     do
@@ -35,30 +35,35 @@ void CppStringToken::extract() throw (string)
         // Replace any whitespace character with a blank.
         if (isspace(current_ch)) current_ch = ' ';
 
-        if ((current_ch != '\'') && (current_ch != EOF))
+        if ((current_ch != '\"') && (current_ch != Source::END_OF_FILE))
         {
             text += current_ch;
-            value_str  += current_ch;
-            current_ch = next_char();  // consume character
-        }
-
-        // Quote?  Each pair of adjacent quotes represents a single-quote.
-        if (current_ch == '\'')
-        {
-            while ((current_ch == '\'') && (peek_char() == '\''))
+            if(current_ch != '\\')
+                value_str  += current_ch;
+            if(current_ch == '\\')
             {
-                text += "''";
-                value_str  += current_ch;  // append single-quote
-                current_ch = next_char();  // consume pair of quotes
+                current_ch = next_char();
+                text += current_ch;
+                if(current_ch == 't')
+                    value_str += '\t';
+                if(current_ch == 'n')
+                    value_str += '\n';
+                if(current_ch == '"')
+                    value_str += '\"';
                 current_ch = next_char();
             }
+            else
+                current_ch = next_char();  // consume character
         }
-    } while ((current_ch != '\'') && (current_ch != Source::END_OF_FILE));
 
-    if (current_ch == '\'')
+
+    } while ((current_ch != '\"') && (current_ch != Source::END_OF_FILE));
+
+
+    if (current_ch == '\"')
     {
         next_char();  // consume final quote
-        text += '\'';
+        text += '\"';
         type = (TokenType) PT_STRING;
         value = value_str;
     }
