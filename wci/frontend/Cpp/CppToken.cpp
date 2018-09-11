@@ -27,54 +27,52 @@ void CppToken::initialize()
 
     vector<string> rw_strings =
     {
-        "AND", "ARRAY", "BEGIN", "CASE", "CONST", "DIV", "DO", "DOWNTO",
-        "ELSE", "END", "FILE", "FOR", "FUNCTION", "GOTO", "IF", "IN",
-        "LABEL", "MOD", "NIL", "NOT", "OF", "OR", "PACKED", "PROCEDURE",
-        "PROGRAM", "RECORD", "REPEAT", "SET", "THEN", "TO", "TYPE",
-        "UNTIL", "VAR", "WHILE", "WITH"
+        "AUTO", "DOUBLE", "INT", "STRUCT", "BREAK", "ELSE", "LONG", "SWITCH",
+        "CASE", "ENUM", "NAMESPACE", "TEMPLATE", "CHAR", "EXTERN", "OPERATOR", "THIS",
+        "CLASS", "FLOAT", "PROTECTED", "THROW", "CONST", "FOR", "PUBLIC", "UNION",
+        "CONTINUE", "GOTO", "RETURN", "VOID", "DO", "IF", "STATIC",
+        "WHILE"
     };
+
 
     vector<CppTokenType> rw_keys =
     {
-        CppTokenType::AND,
-        CppTokenType::ARRAY,
-        CppTokenType::BEGIN,
-        CppTokenType::CASE,
-        CppTokenType::CONST,
-        CppTokenType::DIV,
-        CppTokenType::DO,
-        CppTokenType::DOWNTO,
-
+        CppTokenType::AUTO,
+        CppTokenType::DOUBLE,
+        CppTokenType::INT,
+        CppTokenType::STRUCT,
+        CppTokenType::BREAK,
         CppTokenType::ELSE,
-        CppTokenType::END,
-        CppTokenType::FILE,
+        CppTokenType::LONG,
+        CppTokenType::SWITCH,
+
+        CppTokenType::CASE,
+        CppTokenType::ENUM,
+        CppTokenType::NAMESPACE,
+        CppTokenType::TEMPLATE,
+        CppTokenType::CHAR,
+        CppTokenType::EXTERN,
+        CppTokenType::OPERATOR,
+        CppTokenType::THIS,
+
+        CppTokenType::CLASS,
+        CppTokenType::FLOAT,
+        CppTokenType::PROTECTED,
+        CppTokenType::THROW,
+        CppTokenType::CONST,
         CppTokenType::FOR,
-        CppTokenType::FUNCTION,
+        CppTokenType::PUBLIC,
+        CppTokenType::UNION,
+
+        CppTokenType::CONTINUE,
         CppTokenType::GOTO,
+        CppTokenType::RETURN,
+        CppTokenType::VOID,
+        CppTokenType::DO,
         CppTokenType::IF,
-        CppTokenType::IN,
+        CppTokenType::STATIC,
 
-        CppTokenType::LABEL,
-        CppTokenType::MOD,
-        CppTokenType::NIL,
-        CppTokenType::NOT,
-        CppTokenType::OF,
-        CppTokenType::OR,
-        CppTokenType::PACKED,
-        CppTokenType::PROCEDURE,
-
-        CppTokenType::PROGRAM,
-        CppTokenType::RECORD,
-        CppTokenType::REPEAT,
-        CppTokenType::SET,
-        CppTokenType::THEN,
-        CppTokenType::TO,
-        CppTokenType::TYPE,
-
-        CppTokenType::UNTIL,
-        CppTokenType::VAR,
-        CppTokenType::WHILE,
-        CppTokenType::WITH
+        CppTokenType::WHILE
     };
 
     for (int i = 0; i < rw_strings.size(); i++)
@@ -84,8 +82,11 @@ void CppToken::initialize()
 
     vector<string> ss_strings =
     {
-        "+", "-", "*", "/", ":=", ".", ",", ";", ":", "'", "=", "<>",
-        "<", "<=", ">=", ">", "(", ")", "[", "]", "{", "}",  "^", ".."
+        "+", "-", "*", "/", "~", ".", ",", ";", ":", "'", "=", "!=",
+        "<", "<=", ">=", ">", "(", ")", "[", "]", "{", "}",  "^", "!",
+        "@", "%", "&", "|", "?", ",", ".", "++", "--", "<<",  ">>", "+=",
+        "-=", "*=", "/=", "==", "|=", "%=", "&=", "^=", "!=", "<<=",  ">>=", "||",
+        "&&", "//", "/*", "*/"
     };
 
     vector<CppTokenType> ss_keys =
@@ -94,7 +95,7 @@ void CppToken::initialize()
         CppTokenType::MINUS,
         CppTokenType::STAR,
         CppTokenType::SLASH,
-        CppTokenType::COLON_EQUALS,
+        CppTokenType::SLASH,
         CppTokenType::DOT,
         CppTokenType::COMMA,
         CppTokenType::SEMICOLON,
@@ -114,7 +115,38 @@ void CppToken::initialize()
         CppTokenType::LEFT_BRACE,
         CppTokenType::RIGHT_BRACE,
         CppTokenType::UP_ARROW,
-        CppTokenType::DOT_DOT
+        CppTokenType::EXCLAMATION,
+
+        CppTokenType::AT,
+        CppTokenType::PERCENT,
+        CppTokenType::AND,
+        CppTokenType::LINE,
+        CppTokenType::QUESTION,
+        CppTokenType::COMMA,
+        CppTokenType::PERIOD,
+        CppTokenType::PLUS_PLUS,
+        CppTokenType::MINUS_MINUS,
+        CppTokenType::LESS_LESS,
+        CppTokenType::GREATER_GREATER,
+        CppTokenType::PLUS_EQUAL,
+
+        CppTokenType::MINUS_EQUAL,
+        CppTokenType::STAR_EQUAL,
+        CppTokenType::SLASH_EQUAL,
+        CppTokenType::EQUAL_EQUAL,
+        CppTokenType::LINE_EQUAL,
+        CppTokenType::PERCENT_EQUAL,
+        CppTokenType::AND_EQUAL,
+        CppTokenType::UP_ARROW_EQUAL,
+        CppTokenType::EXCLAMATION_EQUAL,
+        CppTokenType::LESS_LESS_EQUAL,
+        CppTokenType::GREATER_GREATER_EQUAL,
+        CppTokenType::LINE_LINE,
+
+        CppTokenType::AND_AND,
+        CppTokenType::SLASH_SLASH,
+        CppTokenType::SLASH_STAR,
+        CppTokenType::STAR_SLASH
     };
 
     for (int i = 0; i < ss_strings.size(); i++)
@@ -124,12 +156,21 @@ void CppToken::initialize()
 
     vector<string> ss_names =
     {
-        "PLUS", "MINUS", "STAR", "SLASH", "COLON_EQUALS", "DOT", "COMMA",
+        "PLUS", "MINUS", "STAR", "SLASH", "TILDA", "DOT", "COMMA",
         "SEMICOLON", "COLON", "QUOTE", "EQUALS", "NOT_EQUALS",
 
         "LESS_THAN", "LESS_EQUALS", "GREATER_EQUALS", "GREATER_THAN",
         "LEFT_PAREN", "RIGHT_PAREN", "LEFT_BRACKET", "RIGHT_BRACKET",
-        "LEFT_BRACE", "RIGHT_BRACE", "UP_ARROW", "DOT_DOT"
+        "LEFT_BRACE", "RIGHT_BRACE", "UP_ARROW", "EXCLAMATION",
+
+        "AT", "PERCENT", "AND", "LINE",
+        "QUESTION", "COMMA", "PERIOD", "PLUS_PLUS",
+        "MINUS_MINUS", "LESS_LESS", "GREATER_GREATER", "PLUS_EQUAL",
+
+        "MINUS_EQUAL", "STAR_EQUAL", "SLASH_EQUAL", "EQUAL_EQUAL",
+        "LINE_EQUALE", "PERCENT_EQUALT", "AND_EQUAL", "UP_ARROW_EQUAL",
+        "EXCLAMATION_EQUAL", "LESS_LESS_EQUAL", "GREATER_GREATER_EQUAL", "LINE_LINE",
+        "AND_AND", "SLASH_SLASH", "SLASH_STAR", "STAR_SLASH"
     };
 
     for (int i = 0; i < ss_names.size(); i++)
