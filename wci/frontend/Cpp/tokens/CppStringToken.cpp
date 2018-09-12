@@ -34,7 +34,7 @@ void CppStringToken::extract() throw (string)
     {
         // Replace any whitespace character with a blank.
         if (isspace(current_ch)) current_ch = ' ';
-
+        
         if ((current_ch != '\"') && (current_ch != Source::END_OF_FILE))
         {
             text += current_ch;

@@ -14,8 +14,8 @@
 #include "tokens/CppWordToken.h"
 #include "tokens/CppNumberToken.h"
 #include "tokens/CppStringToken.h"
+#include "tokens/CppCharacterToken.h"
 #include "tokens/CppSpecialSymbolToken.h"
-//#include "tokens/CppCharacterToken.h"
 #include "tokens/CppErrorToken.h"
 
 namespace wci { namespace frontend { namespace Cpp {
@@ -43,6 +43,10 @@ Token *CppScanner::extract_token() throw (string)
     if (current_ch == Source::END_OF_FILE)
     {
         token = nullptr;
+    }
+    else if (current_ch == '\'')
+    {
+        token = new CppCharacterToken(source);
     }
     else if (isalpha(current_ch) || current_ch == '_')
     {

@@ -89,16 +89,16 @@ Cplusplus::Cplusplus(string operation, string file_path, string flags)
     printf("Got to cplusplus construction/n");
     source = new Source(input);
     source->add_message_listener(this);
-    printf("cpp 3/n");
+    //printf("cpp 3/n");
     parser = FrontendFactory::create_parser("Cpp", "top-down", source);
     parser->add_message_listener(this);
     parser->parse();
 
     source->close();
-    printf("cpp 4/n");
+    //printf("cpp 4/n");
     symtab = parser->get_symtab();
     icode = parser->get_icode();
-    printf("cpp 5/n");
+    //printf("cpp 5/n");
     backend = BackendFactory::create_backend(operation);
     backend->add_message_listener(this);
     backend->process(icode, symtab);
@@ -207,7 +207,7 @@ void Cplusplus::message_received(Message& message)
                 || (token_type == "STRING")
                 || (token_type == "CHARACTER"))
             {
-                if (token_type == "STRING")
+                if ((token_type == "STRING"))
                 {
                     token_value = "\"" + token_value + "\"";
                 }

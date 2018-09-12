@@ -43,7 +43,7 @@ enum class CppTokenType
     EQUAL_EQUALS, LINE_EQUALS, PERCENT_EQUALS, AND_EQUALS, CARET_EQUALS, NOT_EQUALS, SHIFT_LEFT_EQUALS, SHIFT_RIGHT_EQUALS, LINE_LINE, AND_AND,  
     SLASH_SLASH, SLASH_STAR, STAR_SLASH, 
 
-    IDENTIFIER, INTEGER, REAL, STRING,
+    IDENTIFIER, INTEGER, REAL, STRING, CHARACTER,
     ERROR, END_OF_FILE,
 };
 
@@ -144,6 +144,7 @@ constexpr CppTokenType CT_SLASH_STAR = CppTokenType::SLASH_STAR;
 constexpr CppTokenType CT_STAR_SLASH = CppTokenType::STAR_SLASH;
 
 constexpr CppTokenType CT_IDENTIFIER = CppTokenType::IDENTIFIER;
+constexpr CppTokenType CT_CHARACTER = CppTokenType::CHARACTER;
 constexpr CppTokenType CT_INTEGER = CppTokenType::INTEGER;
 constexpr CppTokenType CT_REAL = CppTokenType::REAL;
 constexpr CppTokenType CT_STRING = CppTokenType::STRING;

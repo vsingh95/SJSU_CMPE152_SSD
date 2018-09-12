@@ -22,6 +22,7 @@ SRCS =  Cplusplus.cpp \
         wci/frontend/Cpp/CppScanner.cpp \
         wci/frontend/Cpp/CppToken.cpp \
         wci/frontend/Cpp/tokens/CppErrorToken.cpp \
+        wci/frontend/Cpp/tokens/CppCharacterToken.cpp \
         wci/frontend/Cpp/tokens/CppNumberToken.cpp \
         wci/frontend/Cpp/tokens/CppSpecialSymbolToken.cpp \
         wci/frontend/Cpp/tokens/CppStringToken.cpp \

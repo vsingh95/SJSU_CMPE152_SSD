@@ -67,6 +67,13 @@ void CppParserTD::parse() throw (string)
                 break;
             }
 
+            case CT_CHARACTER:
+            {
+                type_str = "CHARACTER";
+                value_str = cast(value, string);
+                break;
+            }
+
             case CT_INTEGER:
             {
                 type_str = "INTEGER";
@@ -89,7 +96,7 @@ void CppParserTD::parse() throw (string)
                 if (!value.empty())
                 {
                     value_str = cast(value, string);
-                    type_str = value_str;
+                    type_str = to_upper(value_str);
                 }
 
                 // Special symbol
