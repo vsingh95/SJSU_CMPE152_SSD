@@ -1,7 +1,7 @@
 /**
  * <h1>IfExecutor</h1>
  *
- * <p>Execute an IF statement.</p>
+ * <p>Execute an WHEN statement.</p>
  *
  * <p>Copyright (c) 2017 by Ronald Mak</p>
  * <p>For instructional purposes only.  No warranties.</p>
@@ -33,27 +33,40 @@ WhenExecutor::WhenExecutor(Executor *parent)
 Object WhenExecutor::execute(ICodeNode *node)
 {
 
-    // Get the WHEN node's children.
-    vector<ICodeNode *> select_children = node->get_children();
-    ICodeNode *expr_node = select_children[0];
+   // Get the WHEN node's branch_children.
+    vector<ICodeNode *> branch_children = node->get_children();
+    
+    for(int i = 0 ; i < branch_children.size(); i++)
+    {
+        ICodeNode *wb_node = branch_children[i];
+        vector<ICodeNode *> children = wb_node->get_children();
+        ICodeNode *expr_node = children.size() != 1 ? children[0] : nullptr;
+        ICodeNode *stmt_node = children.size() != 1 ? children[1] : children[0];
+        
+        ExpressionExecutor expression_executor(this);
+        StatementExecutor statement_executor(this);
 
-    // Evaluate the WHEN expression.
-    ExpressionExecutor expression_executor(this);
-    Object select_value = expression_executor.execute(expr_node);
+        // Evaluate the expression to determine which statement to execute.
+        if (expr_node == nullptr)
+        {
+            statement_executor.execute(stmt_node);
+            break;
+        }
+        else
+        {
+            Object data_value = expression_executor.execute(expr_node);
+            if (cast(data_value, bool))
+            {
+                statement_executor.execute(stmt_node);
+                break;
+            }
+        }
 
-    // If there is a selection, execute the WHEN_BRANCH's statement.
-    int key = instanceof(select_value, int)
-                                    ? cast(select_value, int)
-                                    : cast(select_value, string)[0];
-    // ICodeNode *statement_node = (*jump_table)[key];
-    // if (statement_node != nullptr)
-    // {
-    //     StatementExecutor statement_executor(this);
-    //     statement_executor.execute(statement_node);
-    // }
+        ++execution_count;  // count the WHEN statement itself
+    }
 
-    // ++execution_count;  // count the WHEN statement itself
-    // return Object();    // empty
+
+    return Object();    // empty
 }
 
 
