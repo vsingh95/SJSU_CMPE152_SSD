@@ -113,9 +113,14 @@ ICodeNode *WhenStatementParser::parse_statement(Token *token) throw (string)
         // else {
         //     error_handler.flag(token, MISSING_THEN, this);
         // } // Parse the ARROW statement.
-        
+        ICodeNode *branch_node =
+            ICodeFactory::create_icode_node(
+                                       (ICodeNodeType) NT_WHEN_BRANCH);
         StatementParser statement_parser(this);
-        when_node->add_child(statement_parser.parse_statement(token));
+        branch_node->add_child(statement_parser.parse_statement(token));
+
+        when_node->add_child(branch_node);
+
     }
 
 
@@ -136,12 +141,12 @@ ICodeNode *WhenStatementParser::parse_statement(Token *token) throw (string)
 ICodeNode *WhenStatementParser::parse_branch(Token *token)
     throw (string)
 {
-    // Create an SELECT_BRANCH node and a SELECT_CONSTANTS node.
-    // The SELECT_BRANCH node adopts the SELECT_CONSTANTS node as its
+    // Create an WHEN_BRANCH node 
+    // The WHEN_BRANCH node adopts the expression node as its
     // first child.
     ICodeNode *branch_node =
             ICodeFactory::create_icode_node(
-                                       (ICodeNodeType) NT_SELECT_BRANCH);
+                                       (ICodeNodeType) NT_WHEN_BRANCH);
     
     // Parse the expression.
     // The WHEN node adopts the expression subtree as its first child.
