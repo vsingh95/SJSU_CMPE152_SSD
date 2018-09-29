@@ -1,0 +1,176 @@
+./Chapter8cpp execute -ix when.txt
+001 BEGIN
+002 	i := 3;
+003 	WHEN
+004 		i = 1 => f := 10;
+005 		i = 2 => f := 20;
+006 		i = 3 => f := 30;
+007 		i = 4 => f := 40;
+008 		OTHERWISE => f := -1
+009 	END;
+010 
+011 range := 5.7;
+012 
+013 WHEN
+014 	(1.0 <= range) AND (range < 3.0) => level := 1;
+015 	(4.5 <= range) AND (range < 7.5) => BEGIN
+016 											level := 2;
+017 											alpha := range;
+018 										END;
+019 	(8.0 <= range) AND (range < 9.9) => level := 3;
+020 	OTHERWISE => level := -1
+021 	END;
+022 END.
+
+                  22 source lines.
+                   0 syntax errors.
+                0.00 seconds total parsing time.
+
+===== CROSS-REFERENCE TABLE =====
+
+Identifier       Line numbers    
+----------       ------------    
+alpha            017
+f                004 005 006 007 008
+i                002 004 005 006 007
+level            014 016 019 020
+range            011 014 014 015 015 017 019 019
+
+===== INTERMEDIATE CODE =====
+
+<COMPOUND line="1">
+    <ASSIGN line="2">
+        <VARIABLE id="i" level="0" />
+        <INTEGER_CONSTANT value="3" />
+    </ASSIGN>
+    <WHEN line="3">
+        <WHEN_BRANCH>
+            <EQ>
+                <VARIABLE id="i" level="0" />
+                <INTEGER_CONSTANT value="1" />
+            </EQ>
+            <ASSIGN line="4">
+                <VARIABLE id="f" level="0" />
+                <INTEGER_CONSTANT value="10" />
+            </ASSIGN>
+        </WHEN_BRANCH>
+        <WHEN_BRANCH>
+            <EQ>
+                <VARIABLE id="i" level="0" />
+                <INTEGER_CONSTANT value="2" />
+            </EQ>
+            <ASSIGN line="5">
+                <VARIABLE id="f" level="0" />
+                <INTEGER_CONSTANT value="20" />
+            </ASSIGN>
+        </WHEN_BRANCH>
+        <WHEN_BRANCH>
+            <EQ>
+                <VARIABLE id="i" level="0" />
+                <INTEGER_CONSTANT value="3" />
+            </EQ>
+            <ASSIGN line="6">
+                <VARIABLE id="f" level="0" />
+                <INTEGER_CONSTANT value="30" />
+            </ASSIGN>
+        </WHEN_BRANCH>
+        <WHEN_BRANCH>
+            <EQ>
+                <VARIABLE id="i" level="0" />
+                <INTEGER_CONSTANT value="4" />
+            </EQ>
+            <ASSIGN line="7">
+                <VARIABLE id="f" level="0" />
+                <INTEGER_CONSTANT value="40" />
+            </ASSIGN>
+        </WHEN_BRANCH>
+        <WHEN_BRANCH>
+            <ASSIGN line="8">
+                <VARIABLE id="f" level="0" />
+                <NEGATE>
+                    <INTEGER_CONSTANT value="1" />
+                </NEGATE>
+            </ASSIGN>
+        </WHEN_BRANCH>
+    </WHEN>
+    <ASSIGN line="11">
+        <VARIABLE id="range" level="0" />
+        <REAL_CONSTANT value="5.700000" />
+    </ASSIGN>
+    <WHEN line="13">
+        <WHEN_BRANCH>
+            <AND>
+                <LE>
+                    <REAL_CONSTANT value="1.000000" />
+                    <VARIABLE id="range" level="0" />
+                </LE>
+                <LT>
+                    <VARIABLE id="range" level="0" />
+                    <REAL_CONSTANT value="3.000000" />
+                </LT>
+            </AND>
+            <ASSIGN line="14">
+                <VARIABLE id="level" level="0" />
+                <INTEGER_CONSTANT value="1" />
+            </ASSIGN>
+        </WHEN_BRANCH>
+        <WHEN_BRANCH>
+            <AND>
+                <LE>
+                    <REAL_CONSTANT value="4.500000" />
+                    <VARIABLE id="range" level="0" />
+                </LE>
+                <LT>
+                    <VARIABLE id="range" level="0" />
+                    <REAL_CONSTANT value="7.500000" />
+                </LT>
+            </AND>
+            <COMPOUND line="15">
+                <ASSIGN line="16">
+                    <VARIABLE id="level" level="0" />
+                    <INTEGER_CONSTANT value="2" />
+                </ASSIGN>
+                <ASSIGN line="17">
+                    <VARIABLE id="alpha" level="0" />
+                    <VARIABLE id="range" level="0" />
+                </ASSIGN>
+            </COMPOUND>
+        </WHEN_BRANCH>
+        <WHEN_BRANCH>
+            <AND>
+                <LE>
+                    <REAL_CONSTANT value="8.000000" />
+                    <VARIABLE id="range" level="0" />
+                </LE>
+                <LT>
+                    <VARIABLE id="range" level="0" />
+                    <REAL_CONSTANT value="9.900000" />
+                </LT>
+            </AND>
+            <ASSIGN line="19">
+                <VARIABLE id="level" level="0" />
+                <INTEGER_CONSTANT value="3" />
+            </ASSIGN>
+        </WHEN_BRANCH>
+        <WHEN_BRANCH>
+            <ASSIGN line="20">
+                <VARIABLE id="level" level="0" />
+                <NEGATE>
+                    <INTEGER_CONSTANT value="1" />
+                </NEGATE>
+            </ASSIGN>
+        </WHEN_BRANCH>
+    </WHEN>
+</COMPOUND>
+
+===== OUTPUT =====
+
+>>> LINE 002: i = 3
+>>> LINE 006: f = 30
+>>> LINE 011: range = 5.700000
+>>> LINE 016: level = 2
+>>> LINE 017: alpha = 5.700000
+
+                   8 statements executed.
+                   0 runtime errors.
+                0.00 seconds total execution time.

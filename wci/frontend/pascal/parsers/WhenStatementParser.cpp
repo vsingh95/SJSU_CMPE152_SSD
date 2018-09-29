@@ -41,7 +41,8 @@ void WhenStatementParser::initialize()
     if (INITIALIZED) return;
 
     ARROW_SET = StatementParser::STMT_START_SET;
-    ARROW_SET.insert(PascalTokenType::THEN);
+    ARROW_SET.insert(PascalTokenType::ARROW);
+    ARROW_SET.insert(PT_COLON);
 
     set<PascalTokenType>::iterator it;
     for (it  = StatementParser::STMT_FOLLOW_SET.begin();
@@ -70,7 +71,8 @@ ICodeNode *WhenStatementParser::parse_statement(Token *token) throw (string)
 
 
     while ((token != nullptr) &&
-           (token->get_type() != (TokenType) PT_OTHERWISE))
+           (token->get_type() != (TokenType) PT_OTHERWISE) && 
+           (token->get_type() != (TokenType) PT_END))
     {
         
         when_node->add_child(parse_branch(token));
@@ -78,18 +80,6 @@ ICodeNode *WhenStatementParser::parse_statement(Token *token) throw (string)
 
         token = current_token();
         TokenType token_type = token->get_type();
-
-        // Look for the semicolon between WHEN branches.
-        if (token_type == (TokenType) PT_SEMICOLON)
-        {
-            token = next_token(token);  // consume the ;
-        }
-
-        // If at the start of the next constant, then missing a semicolon.
-        else
-        {
-            error_handler.flag(token, MISSING_SEMICOLON, this);
-        }
 
     }
         
@@ -101,8 +91,6 @@ ICodeNode *WhenStatementParser::parse_statement(Token *token) throw (string)
 
         // Parse the OTHERWISE statement.
         // The WHEN node adopts the statement subtree as its third child.
-        token = next_token(token);
-        token_type = token->get_type();
 
         // Synchronize at the ARROW.
         token = synchronize(ARROW_SET);
@@ -110,9 +98,10 @@ ICodeNode *WhenStatementParser::parse_statement(Token *token) throw (string)
         {
             token = next_token(token);  // consume the ARROW
         }
-        // else {
-        //     error_handler.flag(token, MISSING_THEN, this);
-        // } // Parse the ARROW statement.
+        else {
+            error_handler.flag(token, UNEXPECTED_TOKEN, this);
+            token = next_token(token);
+        } // Parse the ARROW statement.
         ICodeNode *branch_node =
             ICodeFactory::create_icode_node(
                                        (ICodeNodeType) NT_WHEN_BRANCH);
@@ -121,6 +110,10 @@ ICodeNode *WhenStatementParser::parse_statement(Token *token) throw (string)
 
         when_node->add_child(branch_node);
 
+    }
+    else
+    {
+        error_handler.flag(token, MISSING_OTHERWISE, this);
     }
 
 
@@ -152,24 +145,36 @@ ICodeNode *WhenStatementParser::parse_branch(Token *token)
     // The WHEN node adopts the expression subtree as its first child.
     ExpressionParser expression_parser(this);
     branch_node->add_child(expression_parser.parse_statement(token));
-    
-    token = next_token(token);
-    TokenType token_type = token->get_type();
-
+    //token = next_token(token);
     // Synchronize at the ARROW.
     token = synchronize(ARROW_SET);
+    
+
     if (token->get_type() == (TokenType) PT_ARROW)
     {
         token = next_token(token);  // consume the ARROW
     }
-    // else {
-    //     error_handler.flag(token, MISSING_THEN, this);
-    // } // Parse the ARROW statement.
+    else 
+    {
+        error_handler.flag(token, UNEXPECTED_TOKEN, this);
+        token = next_token(token);
+    } // Parse the ARROW statement.
     
     // The WHEN node adopts the statement subtree as its second child.
     
     StatementParser statement_parser(this);
     branch_node->add_child(statement_parser.parse_statement(token));    
+    TokenType token_type = token->get_type();
+    // Look for the semicolon between WHEN branches.
+    if (token_type == (TokenType) PT_SEMICOLON)
+    {
+        token = next_token(token);  // consume the ;
+    }
+    // If at the start of the next constant, then missing a semicolon.
+    else
+    {
+        error_handler.flag(token, MISSING_SEMICOLON, this);
+    }
 
     return branch_node;
 }
