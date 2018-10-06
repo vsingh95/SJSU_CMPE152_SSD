@@ -92,9 +92,7 @@ void Predefined::initialize_types(SymTabStack *symtab_stack)
 
     
 
-    SymTab *csymtab;
-    symtab_stack->push(csymtab);
-    csymtab = SymTabFactory::create_symtab((symtab_stack->get_current_nesting_level())+1);
+    SymTab *csymtab = SymTabFactory::create_symtab((symtab_stack->get_current_nesting_level())+2);
 
     complex_type->set_attribute((TypeKey) RECORD_SYMTAB,
                                    csymtab);
@@ -106,7 +104,6 @@ void Predefined::initialize_types(SymTabStack *symtab_stack)
     im_id = csymtab->enter("im");
     im_id->set_typespec(real_type);
     im_id->set_definition((Definition) DF_FIELD);
-    symtab_stack->pop();
 
     // Undefined type.
     undefined_type = TypeFactory::create_type((TypeForm) TF_SCALAR);
