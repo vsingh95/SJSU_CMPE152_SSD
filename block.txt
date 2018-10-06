@@ -51,7 +51,12 @@ VAR
                a : ARRAY [1..5] OF boolean;
            END;
 
+    var10 : RECORD 
+                c : complex; 
+            END;
 BEGIN
+    var10.c.re := 5; 
+
     x := 3.14;
     var1[5] := 3.14;
     var1[var7.i] := var9.rec.flda[e, ten]['q'].fldi;
